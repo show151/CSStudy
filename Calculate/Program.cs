@@ -3,6 +3,70 @@ using System.Collections.Generic;
 
 class Calculate
 {
+    public double Num1 { get; set; }
+    public double Num2 { get; set; }
+    public string Op { get; set; }
+
+    public Calculate(double num1, double num2, string op)
+    {
+        Num1 = num1;
+        Num2 = num2;
+        Op = op;
+    }
+
+    // Calcメソッド: 指定された演算子に応じて計算を実行
+    // num1, num2: 計算対象の数値
+    // op: 演算子 (+, -, *, /, %)
+    // 0で割ろうとした場合や無効な演算子の場合はエラー表示して0を返す
+
+    public double Calc()
+    {
+        if (Op == "+")
+        {
+            return Num1 + Num2;
+        }
+        else if (Op == "-")
+        {
+            return Num1 - Num2;
+        }
+        else if (Op == "*")
+        {
+            return Num1 * Num2;
+        }
+        else if (Op == "/")
+        {
+            if (Num2 != 0)
+            {
+                return Num1 / Num2;
+            }
+            else
+            {
+                Console.WriteLine("エラー: 0で割ることはできません。");
+                return 0;
+            }
+        }
+        else if (Op == "%")
+        {
+            if (Num2 != 0)
+            {
+                return Num1 % Num2;
+            }
+            else
+            {
+                Console.WriteLine("エラー: 0で割ることはできません。");
+                return 0;
+            }
+        }
+        else
+        {
+            Console.WriteLine("エラー: 無効な演算子です。");
+            return 0;
+        }
+    }
+}
+
+class Program
+{
     static void Main()
     {
 
@@ -24,7 +88,8 @@ class Calculate
             double result = 0;
             string record = "";
 
-            result = Calc(num1, num2, op); // Calcメソッドを呼び出して計算
+            Calculate calc = new Calculate(num1, num2, op); // Calcメソッドを呼び出して計算
+            result = calc.Calc();
 
             // 計算結果を文字列に整形して表示
             record = $"{num1} {op} {num2} = {result}";
@@ -49,56 +114,6 @@ class Calculate
                     Console.WriteLine(h);
                 }
             }
-        }
-    }
-
-    // Calcメソッド: 指定された演算子に応じて計算を実行
-    // num1, num2: 計算対象の数値
-    // op: 演算子 (+, -, *, /, %)
-    // 0で割ろうとした場合や無効な演算子の場合はエラー表示して0を返す
-
-    static double Calc(double num1, double num2, string op)
-    {
-        if (op == "+")
-        {
-            return num1 + num2;
-        }
-        else if (op == "-")
-        {
-            return num1 - num2;
-        }
-        else if (op == "*")
-        {
-            return num1 * num2;
-        }
-        else if (op == "/")
-        {
-            if (num2 != 0)
-            {
-                return num1 / num2;
-            }
-            else
-            {
-                Console.WriteLine("エラー: 0で割ることはできません。");
-                return 0;
-            }
-        }
-        else if (op == "%")
-        {
-            if (num2 != 0)
-            {
-                return num1 % num2;
-            }
-            else
-            {
-                Console.WriteLine("エラー: 0で割ることはできません。");
-                return 0;
-            }
-        }
-        else
-        {
-            Console.WriteLine("エラー: 無効な演算子です。");
-            return 0;
         }
     }
 }
